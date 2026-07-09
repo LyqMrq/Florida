@@ -11,7 +11,7 @@ diff --git a/lib/base/rpc.vala b/lib/base/rpc.vala
 index 8990b70e..d5acfebd 100644
 --- a/lib/base/rpc.vala
 +++ b/lib/base/rpc.vala
-@@ -21,21 +21,28 @@ namespace Frida {
+@@ -21,21 +21,30 @@ namespace Frida {
  		public RpcClient (RpcPeer peer) {
  			Object (peer: peer);
  		}
@@ -61,6 +61,5 @@ index 8990b70e..d5acfebd 100644
  				return false;
  
  			var request_id_value = rpc_message.get_element (1);
- 			if (request_id_value.get_value_type () != typeof (string))
 -- 
 2.47.1
