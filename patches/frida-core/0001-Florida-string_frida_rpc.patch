@@ -15,7 +15,7 @@ index 8990b70e..d5acfebd 100644
  		public RpcClient (RpcPeer peer) {
  			Object (peer: peer);
  		}
-
+ 
 +		public string getRpcStr(bool quote){
 +			string result = (string) GLib.Base64.decode((string) GLib.Base64.decode("Wm5KcFpHRTZjbkJq"));
 +			if(quote){
@@ -35,7 +35,7 @@ index 8990b70e..d5acfebd 100644
  		 */
  		public async Json.Node call (string method, Json.Node[] args, Bytes? data, Cancellable? cancellable) throws Error, IOError {
  			string request_id = Uuid.string_random ();
-
+ 
  			var request = new Json.Builder ();
  			request
  				.begin_array ()
@@ -43,21 +43,24 @@ index 8990b70e..d5acfebd 100644
 +				.add_string_value (getRpcStr(false))
  				.add_string_value (request_id)
  				.add_string_value ("call")
-@@ -98,7 +105,7 @@ namespace Frida {
+@@ -98,7 +105,7 @@
  		public bool try_handle_message (string json) {
 -			if (json.index_of ("\"frida:rpc\"") == -1)
 +			if (json.index_of (getRpcStr(true)) == -1)
  				return false;
-
+ 
  			var parser = new Json.Parser ();
-@@ -127,7 +134,7 @@ namespace Frida {
+ 			try {
+ 				parser.load_from_data (json);
+@@ -125,7 +132,7 @@
  				return false;
-
+ 
  			string? type = rpc_message.get_element (0).get_string ();
 -			if (type == null || type != "frida:rpc")
 +			if (type == null || type != getRpcStr(false))
  				return false;
-
+ 
  			var request_id_value = rpc_message.get_element (1);
+ 			if (request_id_value.get_value_type () != typeof (string))
 -- 
 2.47.1
