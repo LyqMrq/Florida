@@ -11,7 +11,7 @@ diff --git a/src/frida-glue.c b/src/frida-glue.c
 index ee8f0737..43cc8167 100644
 --- a/src/frida-glue.c
 +++ b/src/frida-glue.c
-@@ -40,6 +40,8 @@ frida_init_with_runtime (FridaRuntime rt)
+@@ -56,6 +56,8 @@ frida_init_with_runtime (FridaRuntime rt)
      g_io_module_openssl_register ();
  #endif
  
